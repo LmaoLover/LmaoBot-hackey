@@ -1,2 +1,3 @@
 misc/
 .env
+docker-compose.yaml
