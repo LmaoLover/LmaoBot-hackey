@@ -1,3 +1,6 @@
 misc/
 .env
 docker-compose.yaml
+*_memes.txt
+*_memes.json
+__pycache__/
