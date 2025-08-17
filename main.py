@@ -122,6 +122,8 @@ random_memes: dict[str, list[str]] = {
     "rolando": memes["ronaldo"],
     "penaldo": memes["ronaldo"],
     "milady": memes["milady"],
+    "maga": memes["trump"],
+    "biden": memes["biden"],
 }
 
 
