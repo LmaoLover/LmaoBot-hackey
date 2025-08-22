@@ -131,10 +131,11 @@ def random_selection(list):
     return list[random.randint(0, len(list) - 1)]
 
 
+
 meme_cmds = "|".join(
     re.escape(cmd) for cmd in list(simple_memes.keys()) + list(random_memes.keys())
 )
-command_re = re.compile(meme_cmds, flags=re.IGNORECASE)
+command_re = re.compile(r"\/[^\s]*|" + meme_cmds, flags=re.IGNORECASE)
 imdb_re = re.compile(r"(?:.*\.|.*)imdb.com/(?:t|T)itle(?:\?|/)(..\d+)")
 bot_user_lower = "lmaolover"
 
@@ -176,7 +177,7 @@ async def message_handler(websocket, message):
         except ValueError:
             return
 
-        print(f"<{msg.user}> {msg.text}")
+        # print(f"<{msg.user}> {msg.text}")
 
         if msg.user.lower() == bot_user_lower:
             return
@@ -252,7 +253,10 @@ async def message_handler(websocket, message):
 
             links = []
             for cmd in cmds_expanded:
-                if cmd in simple_memes.keys():
+                if cmd in stash_memes:
+                    multi_link = stash_memes.get(cmd, "").split()
+                    links.extend(multi_link)
+                elif cmd in simple_memes.keys():
                     links.append(simple_memes.get(cmd))
                 elif cmd in random_memes.keys():
                     links.append(random_selection(random_memes.get(cmd)))
